@@ -1,0 +1,11 @@
+.LocationListCont{
+	background: red;
+}
+@media (max-width: 64em){
+	.LocationListCont{
+		background: green;
+		max-height: 30vh;
+		overflow: auto;/*permite que aparezca la barra de scroll*/
+		margin-bottom: 20px;
+	}
+}
