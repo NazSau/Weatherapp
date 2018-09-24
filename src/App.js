@@ -47,9 +47,19 @@ class App extends Component {
                         <Col xs={12} lg={6}>
                             <Paper elevation={14}>
                                 <div className="detail"> 
-                                    {city === null ? <h1> No se selecciono ciudad </h1>: 
-                                        <ForecastExtended city={city}>
-                                        </ForecastExtended>
+                                    {
+                                        city && 
+                                        <ForecastExtended city={city}> </ForecastExtended>
+                                        /* las 3 formas de escribirlo
+                                        city ? 
+                                            <ForecastExtended city={city}>
+                                            </ForecastExtended> :
+                                            <h1> No se selecciono ciudad </h1> */
+
+                                       /* city ? 
+                                            <ForecastExtended city={city}>
+                                            </ForecastExtended> :
+                                            null*/
                                     }
                                 </div>
                             </Paper>
