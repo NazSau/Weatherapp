@@ -1,5 +1,5 @@
 .LocationListCont{
-	background: red;
+	/*background: red;*/
 }
 @media (max-width: 64em){
 	.LocationListCont{
