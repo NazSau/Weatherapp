@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
+import {connect} from 'react-redux';
 import {Grid, Row, Col} from  'react-flexbox-grid';
-import './App.css';
 import LocationList from './Components/LocationList';
+import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import WeatherAppBar from './Services/WeatherAppBar.js';
 import ForecastExtended from './Components/ForecastExtended';
-
+import {setCity} from './Actions';
+//import {store} from './Store';
+import './App.css';
 
 
 
@@ -16,13 +19,17 @@ const cities = [
 	"Santiago,chi",
 	"Ciudad de México,mx",
 	"Madrid,es",
-//w	"Washington dc,us",
+//	"Washington dc,us",
 ];
 
 class App extends Component {
 	handleSelectedLocation = city =>{
         this.setState({ city });
 		console.log(`handleSelectionLocationd ${city}` );
+        //const action = {type: 'setCity', value: city};
+        // store.dispatch(setCity(city));
+        this.props.setCity(city);
+
 	}
     constructor() {
         super();
@@ -72,7 +79,19 @@ class App extends Component {
     }
 }
 
-export default App;
+// export default App;
+App.propTypes = {
+    setcity: PropTypes.func.isRequired,
+}
+
+const mapDispatchToProps = (dispatch) =>({//esto mapea las funciones
+    setCity: value => dispatch(setCity(value))//no hay necesidad de que coincidan los setcity, por ejemplo. 
+});
+export default connect(null, mapDispatchToProps)(App);
+/*const AppConnected = connect(null, mapDispatchToProps)(App);//funcion que espera dos funciones como parametro y retorna otra funcion
+
+export default AppConnected;*/
+
     		//el fluid lo que hace es que se alargue sin importar el tañao de pantalla, sin eso es como que queda un espacio en blanco
     		//fluid trata de usar 100% pantalla y sin eso tiene un anchio fijo
     	/*	//si las columnas son del mismo ancho no es necesario poner el espacio que ocupan, se dividen equivalentemente

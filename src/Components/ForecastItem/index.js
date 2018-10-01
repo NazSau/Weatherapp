@@ -7,10 +7,10 @@ class ForecastItem extends Component {
 		const {weekDay, hour, data} = this.props;
 		return(
 			<div>
-				<div>
+				<h2>
 					{weekDay} 
-					Hora: {hour}hs
-				</div>
+					- {hour} hs
+				</h2>
 				<WeatherData data={data}> </WeatherData>
 			</div>
 		);

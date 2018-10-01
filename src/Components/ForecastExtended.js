@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ForecastItem from './ForecastItem';
+import transformForecast from './../Services/transformForecast'
 import './styles.css';
 
 /*const days = [
@@ -27,26 +28,47 @@ class ForecastExtended extends Component{
 		this.state = {forecastData: null}
 	}
 	componentDidMount(){
-
-		const URL_forecast = `${url}?q=${this.props.city}&appid=${ApiKey}`;
+		this.UpdateCity(this.props.city);
+	}
+	componentWillReceiveProps(nextPops){
+		if (nextPops.city !== this.props.city){
+			this.setState({forecastData: null});
+			this.UpdateCity(nextPops.city);
+		}
+	}
+	UpdateCity = city =>{
+		const URL_forecast = `${url}?q=${city}&appid=${ApiKey}`;
 
 		fetch(URL_forecast).then(
 			data => (data.json())
 		).then(
 			wehater_data => {
 				console.log(wehater_data);
+				const forecastData = transformForecast(wehater_data);
+				console.log(forecastData);
+				this.setState({forecastData});
 			}
-		)
+		);
 	}
 
-	renderForecastItemDays(){
-		return "Datos del clima";
-		//return(days.map(day => <ForecastItem weekDay={day} hour={10} data={data}> </ForecastItem>));
-	}
+
+	renderForecastItemDays(forecastData){
+		//return <h1>Render del clima</h1>;
+		return(
+				forecastData.map(forecast => 
+					<ForecastItem
+					key={`${forecast.weekDay}-${forecast.hour}`}
+					weekDay={forecast.weekDay}
+					hour={forecast.hour} 
+					data={forecast.data}> </ForecastItem>)
+				);
+	} 
+
 	renderProgress = () => {
 		return "Cargando pronostico extendido...";
 
 	}
+
 	render(){
 		const {city} = this.props;
 		const {forecastData} = this.state;
@@ -56,7 +78,7 @@ class ForecastExtended extends Component{
 					Pronostico extendido para {city}
 				</h2>
 				{	forecastData ?
-						this.renderForecastItemDays():
+						this.renderForecastItemDays(forecastData):
 						this.renderProgress()
 				}
 			</div>

@@ -27,7 +27,22 @@
   to { transform: rotate(360deg); }
 }
 
-.green{
+.detail{
+  background: #999;
+  height: 85vh;/*view holder, el alto de la pantalla*/
+  width: calc(100% - 40px);
+  overflow: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 0 auto;
+}
+@media (max-width: 62em){
+  .detail{
+    /*background: green;*/
+    height: 40vh;
+  }
+}
+/*.green{
   background: green;
   height: 100px;
   min-width: 50px;
@@ -48,8 +63,4 @@
   min-width: 50px;
 }
 
-.detail{
-  background: #999;
-  height: 100vh;/*view holder, el alto de la pantalla*/
-  width: 100%;
-}
+*/
