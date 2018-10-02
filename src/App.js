@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {Grid, Row, Col} from  'react-flexbox-grid';
 import Paper from '@material-ui/core/Paper';
 import WeatherAppBar from './Services/WeatherAppBar.js';
-import ForecastExtended from './Components/ForecastExtended';
+//import ForecastExtended from './Components/ForecastExtended';
+import ForecastExtendedContainer from './Containers/ForecastExtendedContainer';
 import LocationListContainer from './Containers/LocationListContainer';
 import './App.css';
 
@@ -18,13 +19,13 @@ const cities = [
 ];
 
 class App extends Component {
-    constructor() {
+   /* constructor() {
         super();
         this.state = {city: null};//nunca mas puedo igualr el estado
 
-    }
+    }*/
 	render() {
-        const {city} = this.state;
+        //const {city} = this.state;
     	return (
             <div className="App">
                 <Grid>
@@ -41,10 +42,9 @@ class App extends Component {
                         <Col xs={12} lg={6}>
                             <Paper elevation={14}>
                                 <div className="detail"> 
-                                    {
-                                        city && 
-                                        <ForecastExtended city={city}> </ForecastExtended>
-                                        /* las 3 formas de escribirlo
+                
+                                        <ForecastExtendedContainer> </ForecastExtendedContainer>
+                                        {/* las 3 formas de escribirlo
                                         city ? 
                                             <ForecastExtended city={city}>
                                             </ForecastExtended> :
@@ -52,8 +52,8 @@ class App extends Component {
                                        /* city ? 
                                             <ForecastExtended city={city}>
                                             </ForecastExtended> :
-                                            null*/
-                                    }
+                                            null*/}
+        
                                 </div>
                             </Paper>
                         </Col>
