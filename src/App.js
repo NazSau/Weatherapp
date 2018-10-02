@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
-import {connect} from 'react-redux';
 import {Grid, Row, Col} from  'react-flexbox-grid';
-import LocationList from './Components/LocationList';
-import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import WeatherAppBar from './Services/WeatherAppBar.js';
 import ForecastExtended from './Components/ForecastExtended';
-import {setCity} from './Actions';
-//import {store} from './Store';
+import LocationListContainer from './Containers/LocationListContainer';
 import './App.css';
 
 
@@ -23,14 +18,6 @@ const cities = [
 ];
 
 class App extends Component {
-	handleSelectedLocation = city =>{
-        this.setState({ city });
-		console.log(`handleSelectionLocationd ${city}` );
-        //const action = {type: 'setCity', value: city};
-        // store.dispatch(setCity(city));
-        this.props.setCity(city);
-
-	}
     constructor() {
         super();
         this.state = {city: null};//nunca mas puedo igualr el estado
@@ -49,7 +36,7 @@ class App extends Component {
                     </Row>
                     <Row>
                         <Col xs={12} lg={6}>
-                            <LocationList cities = {cities} onSelectedLocation = {this.handleSelectedLocation} > </LocationList>
+                            <LocationListContainer cities={cities}></LocationListContainer>
                         </Col>
                         <Col xs={12} lg={6}>
                             <Paper elevation={14}>
@@ -62,7 +49,6 @@ class App extends Component {
                                             <ForecastExtended city={city}>
                                             </ForecastExtended> :
                                             <h1> No se selecciono ciudad </h1> */
-
                                        /* city ? 
                                             <ForecastExtended city={city}>
                                             </ForecastExtended> :
@@ -78,16 +64,10 @@ class App extends Component {
         );
     }
 }
-
-// export default App;
-App.propTypes = {
-    setcity: PropTypes.func.isRequired,
-}
-
-const mapDispatchToProps = (dispatch) =>({//esto mapea las funciones
+export default App;
+/*const mapDispatchToProps = (dispatch) =>({//esto mapea las funciones
     setCity: value => dispatch(setCity(value))//no hay necesidad de que coincidan los setcity, por ejemplo. 
-});
-export default connect(null, mapDispatchToProps)(App);
+});*/
 /*const AppConnected = connect(null, mapDispatchToProps)(App);//funcion que espera dos funciones como parametro y retorna otra funcion
 
 export default AppConnected;*/
